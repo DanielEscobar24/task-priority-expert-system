@@ -1,0 +1,31 @@
+{
+  "caso": "Estudiar para un examen de matemáticas",
+  "rol": "concluye",
+  "hechos": {
+    "fecha_entrega": {
+      "valor": "2026-11-09",
+      "cf": 1,
+      "origen": "Fecha ficticia del aviso académico: entrega el 9 de noviembre de 2026; referencia del caso: 8 de noviembre de 2026.",
+      "clase": "inicial"
+    },
+    "plazo": {
+      "valor": "urgente",
+      "cf": 1.0,
+      "origen": "Categoría inicial preparada desde fecha_entrega y la referencia fija 2026-11-08; no es una conclusión de prioridad.",
+      "clase": "inicial"
+    },
+    "importancia": {
+      "valor": "alta",
+      "cf": 0.9,
+      "origen": "Valoración del estudiante por el peso del examen; aún no confirma todos los criterios.",
+      "clase": "inicial"
+    },
+    "esfuerzo": {
+      "valor": "alto",
+      "cf": 0.8,
+      "origen": "Estima más de tres horas de repaso; no ha resuelto aún todos los temas.",
+      "clase": "inicial"
+    }
+  },
+  "fecha_referencia": "2026-11-08"
+}

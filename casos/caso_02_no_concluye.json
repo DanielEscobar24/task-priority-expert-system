@@ -1,0 +1,31 @@
+{
+  "caso": "Ordenar material de lectura opcional sin fecha de entrega",
+  "rol": "no_concluye",
+  "hechos": {
+    "fecha_entrega": {
+      "valor": "sin_fecha",
+      "cf": 1,
+      "origen": "El estudiante confirma que la actividad no tiene fecha de entrega.",
+      "clase": "inicial"
+    },
+    "plazo": {
+      "valor": "sin_fecha",
+      "cf": 1,
+      "origen": "Categoría inicial preparada desde fecha_entrega y la referencia fija 2026-11-08; no es una conclusión de prioridad.",
+      "clase": "inicial"
+    },
+    "importancia": {
+      "valor": "baja",
+      "cf": 0.9,
+      "origen": "Valoración del estudiante: actividad opcional sin impacto en compromisos actuales; sus necesidades pueden cambiar.",
+      "clase": "inicial"
+    },
+    "esfuerzo": {
+      "valor": "bajo",
+      "cf": 0.9,
+      "origen": "El estudiante revisó el material y estima una organización breve; podría aparecer algún documento adicional.",
+      "clase": "inicial"
+    }
+  },
+  "fecha_referencia": "2026-11-08"
+}

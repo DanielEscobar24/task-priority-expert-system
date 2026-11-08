@@ -1,0 +1,196 @@
+{
+  "nombre": "Sistema experto para priorizacion de tareas",
+  "reglas": [
+    {
+      "id": "r1",
+      "prioridad": 20,
+      "cf": 0.9,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "alta"
+        ],
+        [
+          "esfuerzo",
+          "!=",
+          "bajo"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "alta"
+      ],
+      "porque": "El impacto alto y un esfuerzo alto o medio justifican atención prioritaria aunque no se conozca el vencimiento."
+    },
+    {
+      "id": "r2",
+      "prioridad": 20,
+      "cf": 0.6,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "alta"
+        ],
+        [
+          "esfuerzo",
+          "==",
+          "bajo"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "media"
+      ],
+      "porque": "Una tarea importante pero breve admite planificación regular cuando no hay evidencia adicional de urgencia."
+    },
+    {
+      "id": "r3",
+      "prioridad": 20,
+      "cf": 0.6,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "media"
+        ],
+        [
+          "esfuerzo",
+          "!=",
+          "bajo"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "media"
+      ],
+      "porque": "Una tarea de impacto medio y esfuerzo alto o medio necesita planificación regular, sin equipararla automáticamente a un compromiso de alto impacto."
+    },
+    {
+      "id": "r4",
+      "prioridad": 20,
+      "cf": 0.6,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "media"
+        ],
+        [
+          "esfuerzo",
+          "==",
+          "bajo"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "baja"
+      ],
+      "porque": "Una tarea de impacto medio y carga reducida puede atenderse después de compromisos de mayor impacto o carga."
+    },
+    {
+      "id": "r5",
+      "prioridad": 20,
+      "cf": 0.9,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "baja"
+        ],
+        [
+          "esfuerzo",
+          "!=",
+          "bajo"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "baja"
+      ],
+      "porque": "Una tarea de impacto bajo y esfuerzo alto o medio no debe desplazar compromisos importantes por su sola carga."
+    },
+    {
+      "id": "r6",
+      "prioridad": 20,
+      "cf": 0.9,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "baja"
+        ],
+        [
+          "esfuerzo",
+          "==",
+          "bajo"
+        ],
+        [
+          "plazo",
+          "!=",
+          "sin_fecha"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "baja"
+      ],
+      "porque": "Una tarea de impacto y esfuerzo bajos con vencimiento declarado admite prioridad baja; sin fecha el sistema conserva la tarea y se abstiene de recomendar para esta combinación."
+    },
+    {
+      "id": "r7",
+      "prioridad": 100,
+      "cf": 0.9,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "alta"
+        ],
+        [
+          "esfuerzo",
+          "==",
+          "bajo"
+        ],
+        [
+          "plazo",
+          "==",
+          "urgente"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "alta"
+      ],
+      "porque": "Un vencimiento urgente refuerza la atención alta de una tarea importante aunque su esfuerzo sea reducido."
+    },
+    {
+      "id": "r8",
+      "prioridad": 100,
+      "cf": 0.9,
+      "si": [
+        [
+          "importancia",
+          "==",
+          "media"
+        ],
+        [
+          "esfuerzo",
+          "!=",
+          "bajo"
+        ],
+        [
+          "plazo",
+          "==",
+          "urgente"
+        ]
+      ],
+      "entonces": [
+        "prioridad_tarea",
+        "alta"
+      ],
+      "porque": "Un vencimiento urgente y un esfuerzo alto o medio refuerzan la atención alta de una tarea de impacto medio."
+    }
+  ]
+}

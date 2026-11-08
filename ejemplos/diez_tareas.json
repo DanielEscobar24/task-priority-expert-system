@@ -1,0 +1,232 @@
+[
+  {
+    "tarea": "Estudiar para un examen de matemáticas",
+    "hechos": {
+      "plazo": {
+        "valor": "urgente",
+        "cf": 1.0,
+        "origen": "Fecha publicada por el docente: examen mañana.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante por el peso del examen; aún no confirma todos los criterios.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "alto",
+        "cf": 0.8,
+        "origen": "Estima más de tres horas de repaso; no ha resuelto aún todos los temas.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Preparar una presentación de historia",
+    "hechos": {
+      "plazo": {
+        "valor": "proximo",
+        "cf": 1.0,
+        "origen": "Calendario de clase: presentación dentro de cinco días.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante por la relevancia de la presentación; falta revisar la rúbrica completa.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "alto",
+        "cf": 0.7,
+        "origen": "Estima más de tres horas entre investigación y práctica; aún no termina el guion.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Leer un capítulo de literatura",
+    "hechos": {
+      "plazo": {
+        "valor": "proximo",
+        "cf": 1.0,
+        "origen": "Instrucción del docente: lectura para dentro de cuatro días.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "media",
+        "cf": 0.8,
+        "origen": "Valoración del estudiante como preparación de clase; no sabe si habrá evaluación.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "medio",
+        "cf": 0.7,
+        "origen": "Estima entre una y tres horas; todavía no conoce la dificultad del capítulo.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Entregar ejercicios de física",
+    "hechos": {
+      "plazo": {
+        "valor": "urgente",
+        "cf": 1.0,
+        "origen": "Fecha de entrega publicada en la plataforma: dentro de dos días.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante por el peso de la actividad; falta confirmar su impacto exacto.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "medio",
+        "cf": 0.7,
+        "origen": "Estima entre una y tres horas; aún no revisa los ejercicios finales.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Practicar vocabulario de inglés",
+    "hechos": {
+      "plazo": {
+        "valor": "con_tiempo",
+        "cf": 0.9,
+        "origen": "Calendario provisional de evaluación: dentro de doce días, pendiente de confirmación.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "media",
+        "cf": 0.8,
+        "origen": "Valoración del estudiante como práctica complementaria; su necesidad de repaso puede cambiar.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "bajo",
+        "cf": 0.8,
+        "origen": "Estima cuarenta minutos para la sesión; no ha revisado todas las palabras.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Preparar una práctica de laboratorio",
+    "hechos": {
+      "plazo": {
+        "valor": "proximo",
+        "cf": 1.0,
+        "origen": "Horario de clase confirmado: práctica dentro de seis días.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante por la preparación requerida; aún no conoce todos los criterios.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "medio",
+        "cf": 0.7,
+        "origen": "Estima entre una y tres horas; falta revisar la guía completa.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Reunirse con un equipo de estudio",
+    "hechos": {
+      "plazo": {
+        "valor": "proximo",
+        "cf": 1.0,
+        "origen": "Acuerdo confirmado del grupo: reunión dentro de tres días.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "media",
+        "cf": 0.8,
+        "origen": "Valoración del estudiante para aclarar dudas; los temas aún pueden cambiar.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "bajo",
+        "cf": 0.9,
+        "origen": "El grupo acordó cuarenta y cinco minutos; la reunión podría extenderse.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Solicitar una cita médica",
+    "hechos": {
+      "plazo": {
+        "valor": "con_tiempo",
+        "cf": 0.8,
+        "origen": "Meta personal: gestionar una cita rutinaria dentro de quince días; no es un plazo confirmado.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante de esta gestión administrativa; no es una evaluación médica.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "bajo",
+        "cf": 0.7,
+        "origen": "Estima menos de una hora para solicitarla; desconoce los tiempos de espera.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Pagar el servicio de internet",
+    "hechos": {
+      "plazo": {
+        "valor": "urgente",
+        "cf": 1.0,
+        "origen": "Fecha de vencimiento en la factura: mañana.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "alta",
+        "cf": 0.9,
+        "origen": "Valoración del estudiante por la continuidad del servicio; no confirma el margen de suspensión.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "bajo",
+        "cf": 0.9,
+        "origen": "Estima diez minutos usando el portal habitual; puede haber demoras.",
+        "clase": "inicial"
+      }
+    }
+  },
+  {
+    "tarea": "Organizar los apuntes de clase",
+    "hechos": {
+      "plazo": {
+        "valor": "con_tiempo",
+        "cf": 0.8,
+        "origen": "Meta personal: completar la organización dentro de catorce días; puede ajustarse.",
+        "clase": "inicial"
+      },
+      "importancia": {
+        "valor": "media",
+        "cf": 0.8,
+        "origen": "Valoración del estudiante para facilitar futuros repasos; no hay evaluación asociada confirmada.",
+        "clase": "inicial"
+      },
+      "esfuerzo": {
+        "valor": "medio",
+        "cf": 0.7,
+        "origen": "Estima entre una y tres horas; aún no cuenta todos los apuntes.",
+        "clase": "inicial"
+      }
+    }
+  }
+]

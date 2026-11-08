@@ -1,0 +1,192 @@
+import {alpha} from '@mui/material/styles';
+import type {Theme, CSSObject} from '@mui/material/styles';
+import {taskColor, lightCardTokens} from '../../theme/taskPalette';
+import {appPalette, surfaceEffects} from '../../theme/palette';
+import {CalendarSlots as Slots} from './slots/slots';
+
+type Style = (props: {theme: Theme}) => CSSObject;
+
+export const calendarStyles: Record<Slots, Style> = {
+  [Slots.root]: ({theme: t}) => ({
+    userSelect: 'none',
+    '& input, & textarea, & [contenteditable=true]': {userSelect: 'text'},
+    display: 'flex', height: '100vh', '@supports (height: 100dvh)': {height: '100dvh'}, overflow: 'hidden', background: t.palette.background.default, color: t.palette.text.primary,
+    '& button': {font: 'inherit', fontSize: 12, borderRadius: 6, padding: '9px 13px', cursor: 'pointer', border: `1px solid ${t.palette.divider}`, background: t.palette.background.paper, color: t.palette.text.primary},
+    '& button:hover': {borderColor: t.palette.primary.light, background: t.palette.action.hover},
+    '& button:focus-visible, & a:focus-visible, & input:focus-visible, & textarea:focus-visible, & select:focus-visible': {outline: `3px solid ${t.palette.primary.light}`, outlineOffset: 3},
+    '& button:disabled': {opacity: .5, cursor: 'not-allowed'},
+    '& .add-task': {background: t.palette.primary.main, color: t.palette.primary.contrastText, borderColor: t.palette.primary.main, whiteSpace: 'nowrap', padding: '10px 16px', display: 'inline-flex', alignItems: 'center', gap: 7, fontWeight: 600, borderRadius: 9},
+    '& .add-task:hover': {background: t.palette.primary.dark},
+    '& .nav-current': {display: 'flex', alignItems: 'center', gap: 10, padding: '11px 13px', background: t.palette.action.selected, border: `1px solid ${alpha(t.palette.primary.main, .16)}`, color: t.palette.primary.main, borderRadius: 10, fontSize: 13, fontWeight: 600},
+    '& .sidebar-content': {flex: '1 1 auto', minHeight: 0, overflowY: 'auto'},
+    '& .calendar-nav': {display: 'flex', flexDirection: 'column', gap: 8},
+    '& .calendar-nav button': {width: '100%', display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left'},
+    '& .sidebar-bottom': {flexShrink: 0, marginTop: 20, paddingTop: 16, borderTop: `1px solid ${t.palette.divider}`, display: 'flex', flexDirection: 'column', gap: 16, fontSize: 12, color: t.palette.text.secondary},
+    '& .theme-selector': {display: 'flex', gap: 3, padding: 4, borderRadius: 11, background: t.palette.background.default, border: `1px solid ${t.palette.divider}`},
+    '& .theme-selector button': {flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '8px 6px', border: '1px solid transparent', borderRadius: 7, background: 'transparent', color: t.palette.text.secondary},
+    '& .theme-selector button[aria-pressed=true]': {background: t.palette.background.paper, borderColor: t.palette.divider, color: t.palette.text.primary, boxShadow: `0 1px 3px ${appPalette[t.palette.mode].shadow}`, fontWeight: 600},
+    '& .theme-selector button:hover': {color: t.palette.text.primary, background: t.palette.action.hover},
+    '& .initial-dot': {display: 'inline-block', width: 7, height: 7, background: t.palette.primary.main, borderRadius: '50%', marginRight: 5},
+    '& .calendar-heading': {display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '24px 0 20px', gap: 16},
+    '& h1': {fontSize: 28, letterSpacing: -.8, fontWeight: 600, lineHeight: 1.2, margin: '4px 0'},
+    '& .calendar-heading p': {fontSize: 13, color: t.palette.text.secondary, margin: '8px 0'},
+    '& .week-panel': {flex: '1 1 auto', minHeight: 250, display: 'flex', flexDirection: 'column',boxShadow: `0 8px 28px ${appPalette[t.palette.mode].shadow}`, background: t.palette.background.paper, border: `1px solid ${t.palette.divider}`, borderRadius: 10, overflow: 'hidden'},
+    '& .week-toolbar': {display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 18, gap: 14, flexWrap: 'wrap'},
+    '& .week-navigation': {display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap'},
+    '& .week-navigation h2': {fontSize: 14, margin: '0 0 0 12px', fontWeight: 600},
+    '& .week-view': {display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: t.palette.text.secondary},
+    '& .week-scroll': {flex: '1 1 auto', minHeight: 0, overflow: 'auto', scrollbarGutter: 'stable', overflowAnchor: 'none'},
+    '& .week-grid': {height: '100%', display: 'grid', gridTemplateColumns: 'repeat(7,minmax(145px,1fr))', minWidth: 1015, borderTop: `1px solid ${t.palette.divider}`},
+    // Theme colors switch together; color transitions belong only to active drag feedback.
+    '& .day-column': {borderRight: `1px solid ${t.palette.divider}`, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden'},
+    '& .day-column:last-child': {borderRight: 0},
+    '& .day-heading': {background: t.palette.background.default, height: 82, flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderBottom: `1px solid ${t.palette.divider}`, gap: 4, position: 'relative'},
+    '& .day-heading > span': {fontSize: 10, color: t.palette.text.secondary, textTransform: 'uppercase'},
+    '& .day-heading strong': {fontSize: 18, fontWeight: 500},
+    '& .day-heading small': {position: 'absolute', right: 7, top: 10, fontSize: 9, fontWeight: 700, color: t.palette.text.primary},
+    '& .is-today': {background: t.palette.action.hover},
+    '& .is-today .day-heading': {boxShadow: `inset 0 3px ${t.palette.primary.main}`},
+    '&[data-dragging=true] .day-column, &[data-dragging=true] .unscheduled': {
+      background: alpha(t.palette.primary.main, t.palette.mode === 'dark' ? .07 : .035),
+      boxShadow: `inset 0 0 0 1px ${alpha(t.palette.primary.main, .4)}`,
+      transition: 'background-color 140ms ease, box-shadow 140ms ease',
+    },
+    '&[data-dragging=true] .drop-target': {
+      background: t.palette.action.selected,
+      boxShadow: `inset 0 0 0 2px ${t.palette.primary.main}`,
+    },
+    '&[data-dragging=true] .drop-target > .day-heading': {boxShadow: `inset 0 3px ${t.palette.primary.main}`},
+    '@media (prefers-reduced-motion: reduce)': {
+      '& *, & *::before, & *::after': {transition: 'none !important', animation: 'none !important', scrollBehavior: 'auto !important'},
+    },
+    '& .is-today .day-heading strong': {background: t.palette.primary.main, color: t.palette.primary.contrastText, borderRadius: '50%', height: 29, width: 29, textAlign: 'center', lineHeight: '29px'},
+    '& .day-tasks': {flex: '1 1 auto', minHeight: 0, padding: 10, display: 'flex', flexDirection: 'column', gap: 8, overflowY: 'auto', overflowAnchor: 'none', scrollbarGutter: 'stable', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent'},
+    '& .day-tasks:hover, & .day-tasks:focus-within': {scrollbarColor: `${t.palette.text.secondary} transparent`},
+    '& .day-tasks:focus-visible': {outline: `2px solid ${t.palette.primary.main}`, outlineOffset: -2},
+    '& .day-tasks::-webkit-scrollbar': {width: 8},
+    '& .day-tasks::-webkit-scrollbar-track': {background: 'transparent'},
+    '& .day-tasks::-webkit-scrollbar-thumb': {background: 'transparent', borderRadius: 8},
+    '& .day-tasks:hover::-webkit-scrollbar-thumb, & .day-tasks:focus-within::-webkit-scrollbar-thumb': {background: t.palette.text.secondary},
+    '@media (hover: none), (forced-colors: active)': {'& .day-tasks': {scrollbarColor: 'auto'}, '& .day-tasks::-webkit-scrollbar-thumb': {background: t.palette.text.secondary}},
+    '& .empty-day': {fontSize: 11, color: t.palette.text.secondary, textAlign: 'center', margin: '30px 0'},
+    '& .day-add': {background: 'transparent', borderStyle: 'dashed', textAlign: 'center', color: t.palette.text.secondary, fontSize: 11},
+    '& .unscheduled': {flexShrink: 0, marginBottom: 16, border: `1px solid ${t.palette.divider}`, background: t.palette.background.paper, borderRadius: 10, overflow: 'hidden'},
+    '& .unscheduled-toggle': {display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', border: 0, background: 'transparent', padding: '12px 16px', textAlign: 'left', fontWeight: 600, borderRadius: 0},
+    '& .count': {display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: 22, height: 22, padding: '0 6px', marginLeft: 8, borderRadius: 6, background: t.palette.action.hover, color: t.palette.text.secondary, fontSize: 11, fontWeight: 500},
+    '& .accordion-chevron': {color: t.palette.text.secondary, transition: 'transform 180ms ease'},
+    '& .unscheduled-toggle[aria-expanded=true] .accordion-chevron': {transform: 'rotate(180deg)'},
+    '& #unscheduled-content': {maxHeight: 'min(220px, 28dvh)', overflowY: 'auto', padding: 12, overflowAnchor: 'none'},
+    '& #unscheduled-content[hidden]': {display: 'none'},
+    '& #unscheduled-content > p': {fontSize: 12, margin: 0, color: t.palette.text.secondary},
+    '& .section-heading h2': {fontSize: 16, margin: 0},
+    '& .section-heading h2 span': {background: t.palette.action.selected, borderRadius: 5, padding: '3px 7px', fontSize: 11, marginLeft: 7, color: t.palette.text.secondary},
+    '& .section-heading p': {fontSize: 11, color: t.palette.text.secondary, margin: '9px 0 16px'},
+    '& .unscheduled-grid': {position: 'relative', display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(210px,1fr))', gap: 12},
+    '& .unscheduled-grid [data-drag-source=true]': {marginBottom: '0 !important'},
+    '& .calendar-status': {fontSize: 12, color: t.palette.text.secondary},
+    '& .priorities-view': {minHeight: 0, paddingBottom: 16},
+    '& .priorities-toolbar': {display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, fontSize: 12, color: t.palette.text.secondary, marginBottom: 6},
+    '& .priorities-toolbar strong, & .priorities-toolbar time': {color: t.palette.text.primary, fontWeight: 600},
+    '& .priorities-context': {fontSize: 11, color: t.palette.text.secondary, margin: '0 0 18px'},
+    '& .priorities-layout': {display: 'grid', gridTemplateColumns: 'minmax(260px, .85fr) minmax(0, 1.15fr)', alignItems: 'start', gap: 24},
+    '& .priorities-list': {listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0},
+    '& .priority-panel': {minWidth: 0, padding: 22, border: `1px solid ${t.palette.divider}`, borderRadius: 12, background: t.palette.background.paper, fontSize: 12, lineHeight: 1.65, overflowWrap: 'anywhere'},
+    '& .priority-panel-heading': {display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16},
+    '& .priority-panel-heading h2': {fontSize: 19, lineHeight: 1.4, margin: '4px 0 18px'},
+    '& .priority-panel-heading button': {flexShrink: 0},
+    '& .priority-panel-eyebrow': {margin: 0, fontSize: 11, color: t.palette.text.secondary},
+    '& .priority-panel-result': {display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, fontSize: 14, paddingBottom: 14, borderBottom: `1px solid ${t.palette.divider}`},
+    '& .priority-panel-result span': {fontVariantNumeric: 'tabular-nums'},
+    '& .priority-panel-facts': {display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 14},
+    '& .priority-panel-facts span': {fontSize: 11, background: t.palette.action.selected, borderRadius: 5, padding: '4px 7px'},
+    '& .priority-panel-note': {fontSize: 11, color: t.palette.text.secondary},
+    '& .priority-description': {whiteSpace: 'pre-wrap'},
+    '& .priority-detail-content': {marginTop: 18, borderTop: `1px solid ${t.palette.divider}`},
+    '& .priority-detail-content h3': {fontSize: 12, margin: '18px 0 8px'},
+    '& .priority-detail-content dl': {margin: 0},
+    '& .priority-detail-content dl > div': {marginBottom: 12},
+    '& .priority-detail-content dt': {display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8},
+    '& .priority-detail-content dd': {margin: '3px 0 0', fontSize: 11, color: t.palette.text.secondary},
+    [t.breakpoints.down('md')]: {'& .priorities-layout': {gridTemplateColumns: 'minmax(0, 1fr)'}, '& .priority-panel': {padding: 18}},
+    [t.breakpoints.down('sm')]: {flexDirection: 'column', '& .sidebar-content': {display: 'flex', alignItems: 'center', gap: 16}, '& nav': {marginLeft: 'auto'}, '& .nav-current': {padding: '8px 10px', fontSize: 12}, '& .sidebar-bottom': {marginTop: 8, paddingTop: 8, gap: 0}, '& .theme-selector': {alignSelf: 'flex-end', minWidth: 180}, '& .theme-selector button': {padding: '6px 10px'}, '& .calendar-heading': {alignItems: 'flex-start'}, '& h1': {fontSize: 27}, '& .calendar-heading p': {maxWidth: 210}, '& .week-view': {display: 'none'}},
+  }),
+  [Slots.sidebar]: ({theme: t}) => ({
+    width: 230, height: '100%', minHeight: 0, flexShrink: 0, background: appPalette[t.palette.mode].sidebar, borderRight: `1px solid ${t.palette.divider}`, padding: '32px 20px', display: 'flex', flexDirection: 'column',
+    [t.breakpoints.down('md')]: {width: 180, padding: '24px 14px'},
+    [t.breakpoints.down('sm')]: {width: '100%', height: 'auto', maxHeight: '40dvh', padding: '10px 16px', borderRight: 0, borderBottom: `1px solid ${t.palette.divider}`},
+  }),
+  [Slots.main]: ({theme: t}) => ({
+    flex: '1 1 auto', width: '100%', minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', overflowY: 'auto', overscrollBehaviorY: 'contain', background: appPalette[t.palette.mode].main, padding: '0 36px 30px',
+    [t.breakpoints.down('md')]: {padding: '0 20px 24px'},
+    [t.breakpoints.down('sm')]: {padding: '0 16px 24px'},
+  }),
+  [Slots.card]: ({theme: t}) => ({
+    '&&': {flexShrink: 0, width: '100%', textAlign: 'left', padding: 13, background: t.palette.background.paper, boxShadow: `0 2px 4px ${appPalette[t.palette.mode].shadow}`, border: `1px solid ${t.palette.divider}`, borderLeft: `3px solid ${t.palette.primary.light}`, borderRadius: 9, cursor: 'grab', transition: 'box-shadow 120ms ease, border-color 120ms ease', display: 'flex', flexDirection: 'column', gap: 10},
+    '&&[data-drag-source=true]': {opacity: 0, pointerEvents: 'none'},
+    '&:active': {cursor: 'grabbing'},
+    '& strong': {fontSize: 13, lineHeight: 1.45, fontWeight: 600},
+    '& .card-facts': {display: 'flex', gap: 5, flexWrap: 'wrap'},
+    '& .card-facts > span': {fontSize: 9, borderRadius: 4, background: t.palette.action.selected, color: t.palette.text.secondary, padding: '4px 6px'},
+    '& .card-bottom': {borderTop: `1px solid ${t.palette.divider}`, paddingTop: 9, fontSize: 9, color: t.palette.text.secondary, display: 'flex', alignItems: 'center'},
+  }),
+  [Slots.priorityCard]: ({theme: t}) => ({
+    padding: 0, minWidth: 0, border: `1px solid ${t.palette.divider}`, borderLeftWidth: 3, borderRadius: 12,
+    '&&[data-selected=true]': {outline: `2px solid ${t.palette.primary.main}`, outlineOffset: 2},
+    '&& .priority-select': {display: 'block', width: '100%', padding: 16, textAlign: 'left', background: 'transparent', border: 0, borderRadius: 11},
+    '&& .priority-select:hover': {background: t.palette.action.hover},
+    '& .priority-topline': {display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8},
+    '& .priority-result': {fontSize: 11, fontWeight: 700},
+    '& .priority-certainty': {fontSize: 14, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap'},
+    '& .priority-certainty small': {fontSize: 10, fontWeight: 500, color: t.palette.text.secondary, marginRight: 3},
+    '& .priority-task-title': {display: 'block', fontSize: 15, lineHeight: 1.45, fontWeight: 600, margin: '10px 0', overflowWrap: 'anywhere'},
+    '& .priority-date': {display: 'flex', flexWrap: 'wrap', gap: 6, fontSize: 11, color: t.palette.text.secondary},
+    '& .priority-date strong': {fontWeight: 500, color: t.palette.text.primary},
+  }),
+  [Slots.placeholder]: ({theme: t}) => ({
+    width: '100%', flexShrink: 0, border: `1px dashed ${t.palette.primary.main}`, borderRadius: 9,
+    background: t.palette.action.hover,
+  }),
+  [Slots.dialog]: ({theme: t}) => ({
+    border: `1px solid ${t.palette.divider}`, borderRadius: 14, padding: 26, maxWidth: 620, maxHeight: 'calc(100dvh - 32px)', overflowY: 'auto', width: 'calc(100% - 32px)', background: t.palette.background.paper, color: t.palette.text.primary,
+    '&::backdrop': {background: appPalette[t.palette.mode].backdrop, backdropFilter: `blur(${surfaceEffects[t.palette.mode].overlayBlur}px)`},
+    '& .dialog-heading': {paddingBottom: 16, borderBottom: `1px solid ${t.palette.divider}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center'},
+    '& h2': {fontSize: 20, margin: 0},
+    '& p': {fontSize: 13, color: t.palette.text.secondary},
+    '& small': {fontSize: 11, color: t.palette.text.secondary},
+    '& label': {display: 'block', fontSize: 13, fontWeight: 600, margin: '12px 0'},
+    '& input, & select, & textarea': {display: 'block', width: '100%', padding: 11, marginTop: 7, font: 'inherit', border: `1px solid ${t.palette.divider}`, borderRadius: 6, color: t.palette.text.primary, background: t.palette.background.paper, colorScheme: t.palette.mode},
+    '& .task-form-fields': {display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) repeat(2, minmax(0, 1fr))', gap: 16, paddingTop: 18},
+    '& .form-full-width': {gridColumn: '1 / -1'},
+    '& textarea': {resize: 'vertical', minHeight: 78, maxHeight: 220},
+    '& .field-label-row': {display: 'flex', alignItems: 'center', gap: 6},
+    '& .field-label-row label': {margin: 0},
+    '& .field-help': {display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 17, height: 17, padding: 0, borderRadius: '50%', fontSize: 11, color: t.palette.text.secondary, background: 'transparent'},
+    '& .dialog-actions': {padding: '14px 0', display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 12, flexWrap: 'wrap'},
+    '& [role=alert]': {color: t.palette.error.main},
+    [t.breakpoints.down('sm')]: {'& .task-form-fields': {gridTemplateColumns: '1fr'}},
+  }),
+};
+
+/** Color de identidad sutil sobre superficies sólidas; contenido siempre nítido. */
+export function taskIdentityStyles({theme, taskIndex}: {theme: Theme; taskIndex: number}): CSSObject {
+  const color = taskColor(taskIndex, theme.palette.mode);
+  const effects = surfaceEffects[theme.palette.mode];
+  const background = `linear-gradient(120deg, ${alpha(color.accent, effects.tint)}, transparent 85%), ${color.surface}`;
+  return {
+    '&&': {background, borderColor: alpha(color.accent, theme.palette.mode === 'light' ? lightCardTokens.borderOpacity : effects.border), borderLeftColor: color.accent, boxShadow: `0 4px 16px ${alpha(color.accent, effects.halo)}`},
+    '&&:hover': {background, borderColor: color.accent, boxShadow: `0 6px 22px ${alpha(color.accent, effects.halo)}`},
+    '& .card-facts > span': {background: alpha(color.accent, theme.palette.mode === 'light' ? lightCardTokens.badgeOpacity : effects.tint), color: theme.palette.text.primary},
+    ...(theme.palette.mode === 'light' ? {'& .card-bottom': {color: lightCardTokens.secondaryText}} : {}),
+  };
+}
+
+export function dialogIdentityStyles({theme, taskIndex}: {theme: Theme; taskIndex: number}): CSSObject {
+  const color = taskColor(taskIndex, theme.palette.mode);
+  const effects = surfaceEffects[theme.palette.mode];
+  return {
+    background: `linear-gradient(145deg, ${alpha(color.accent, effects.tint)}, transparent 55%), ${theme.palette.background.paper}`,
+    borderColor: alpha(color.accent, effects.border),
+    borderTop: `3px solid ${color.accent}`,
+    boxShadow: `0 18px 64px ${appPalette[theme.palette.mode].backdrop}, 0 0 32px ${alpha(color.accent, effects.halo)}`,
+  };
+}
